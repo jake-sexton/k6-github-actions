@@ -1,20 +1,22 @@
-name: k6 Load Test
+name: Run K6 Tests in Cloud
 
 on:
   push:
     branches:
-      - '**'
+      - main  # Adjust to your desired branches
+  pull_request:
 
 jobs:
-  run-test:
+  k6-cloud:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup K6
-        uses: grafana/setup-k6-action@v1
-      - name: Run local k6 test
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        
+      - name: Run K6 Cloud Tests
         uses: grafana/run-k6-action@v1
         with:
           path: test1.js
+        env:
+          K6_CLOUD_TOKEN: ${{ secrets.K6_CLOUD_TOKEN }}
+          K6_PROJECT_ID: ${{ secrets.K6_PROJECT_ID }}
