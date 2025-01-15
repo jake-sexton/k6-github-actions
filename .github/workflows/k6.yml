@@ -3,7 +3,7 @@ name: Run K6 Tests in Cloud
 on:
   push:
     branches:
-      - main  # Adjust to your desired branches
+      - master
   pull_request:
 
 jobs:
